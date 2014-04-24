@@ -1,0 +1,13 @@
+ul class="pagination"
+  - if @page > 0
+    li
+      a href="#{page_list[@page-1][1]}"
+        |&laquo;
+  - page_list.each do |p|
+    li class="#{p[0]== @page+1 ? 'active' : ''}"
+      a href="#{p[1]}"
+        = p[0]
+  - if @page < page_list.count - 1
+    li
+      a href="#{page_list[@page+1][1]}"
+        |&raquo;

@@ -1,0 +1,29 @@
+table
+  tr
+    td
+      SELECT.select_list  multiple="multiple" size="5" class="#{object}_first form-control "
+        /optgroup label="tset"
+        - first_list[0].each do |op|
+          option value="#{op.read_attribute(first_list[1])}"
+            = op.read_attribute(first_list[2])
+    td
+      .paddin
+        button  class="round_bouton button_add" data="#{object}" type="button"
+          span class="glyphicon glyphicon-circle-arrow-right"
+        br
+        button  class="round_bouton button_remove" data="#{object}" type="button"
+          span class="glyphicon glyphicon-circle-arrow-left"
+    td
+      SELECT.select_list multiple="multiple" size="5" class="#{object}_last form-control middel_select" data=".#{object}_send"
+        - unless last_list[:list].blank? && last_list[:list][0].blank?
+          - last_list[:list][0].each do |op|
+            option value="#{op.read_attribute(last_list[:list][1])}" selected=""
+              = op.read_attribute(last_list[:list][2])
+      SELECT.select_list id="#{last_list[:id]}" name="#{last_list[:name]}" multiple="multiple" size="5" class="#{object}_send  form-control " style="display: none;"
+        - unless last_list[:list].blank? && last_list[:list][0].blank?
+          - last_list[:list][0].each do |op|
+            option value="#{op.read_attribute(last_list[:list][1])}" selected=""
+              = op.read_attribute(last_list[:list][2])
+/strong
+/    | Option
+/  = render :partial => "admin/shared/select" , :locals => {:first_list => [@list_option ,:id,:name], :last_list =>{:id=>"room_option",:name=>"room_option[]",:list=>[@hotel.hotels_refs.room_options.map{ |p| p.room_option_ref},:id,:name]} , :object => "option" }

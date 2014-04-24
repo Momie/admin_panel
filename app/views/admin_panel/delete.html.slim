@@ -1,0 +1,14 @@
+= form_tag("#{(path_controller.include? '?') ? path_controller.gsub('?','/'+ eval('@'+controller.controller_name).id.to_s + '?') : path_controller + '/'+ eval('@'+controller.controller_name).id.to_s}", :method => "delete")
+  div class="panel panel-warning"
+    div class="panel-heading"
+      = t('methods.destroy')
+    div class="panel-body"
+      = t('methods.delete')
+      = eval("@#{controller.controller_name}").class.name
+      br
+      br
+      button type="button" class="btn btn-primary" onClick="location.href='#{path_controller}'"
+        = t("methods.cancel")
+      |&nbsp;
+      button type="submit" class="btn btn-danger"
+        = t("methods.destroy")

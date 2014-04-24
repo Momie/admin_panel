@@ -1,0 +1,16 @@
+.row
+  - images.each do |img|
+    div class="col-sm-6 col-md-4"
+      div class="thumbnail"
+        = image_tag(img.url_url(:thumb),:'data-src' =>'holder.js/300x200' )
+        div class="caption"
+          h3
+            = img.name
+          p
+            = img.description
+          /p
+            /a href="#" class="btn btn-primary" role="button"
+            /  |Button
+            /a href="#" class="btn btn-default" role="button"
+            /  |Button
+  

@@ -1,0 +1,13 @@
+/= render :partial => "admin/shared/filtre"
+table class="table"
+  thead
+    - list.each do |h|   
+      th
+        = t("#{controller.controller_name}.#{h[:name]}")
+    th
+  tbody
+    = render :partial => "admin/list", :collection => eval("@#{controller.controller_name}") , :as => :object , :locals => {:tab => list }
+.row
+  .col-md-4.col-lg-3.col-sm-6.col-xs-8.center
+    - unless @page.blank?
+      = render :partial => "admin/shared/pagination"

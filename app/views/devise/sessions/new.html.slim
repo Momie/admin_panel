@@ -1,0 +1,39 @@
+.admin_accces
+  authform
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
+      h3 Log in
+      = devise_error_messages!
+      .contain_login
+        .form-group
+          - if devise_mapping.registerable?
+            = link_to 'Sign up', new_registration_path(resource_name), class: 'right'
+          = f.label :email
+          = f.email_field :email, :autofocus => true, class: 'form-control'
+        .form-group
+          - if devise_mapping.recoverable?
+            = link_to "Forgot password?", new_password_path(resource_name), class: 'right'
+          = f.label :password
+          = f.password_field :password, class: 'form-control'
+          br
+          = f.submit '&nbsp;&nbsp; Log in &nbsp;&nbsp;'.html_safe, :class => 'btn right orange'
+          - if devise_mapping.rememberable?
+            .checkbox
+              = f.check_box :remember_me 
+              = f.label :remember_me
+/<h2>Sign in</h2>
+/
+/<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+/  <div><%= f.label :email %><br />
+/  <%= f.email_field :email, autofocus: true %></div>
+/
+/  <div><%= f.label :password %><br />
+/    <%= f.password_field :password, autocomplete: "off" %></div>
+/
+/  <% if devise_mapping.rememberable? -%>
+/    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+/  <% end -%>
+/
+/  <div><%= f.submit "Sign in" %></div>
+/<% end %>
+/
+/<%= render "devise/shared/links" %>

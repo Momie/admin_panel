@@ -1,0 +1,66 @@
+DOCTYPE html
+html
+head
+  title
+    |Apps
+  = stylesheet_link_tag "en/application", :media => "all"
+  = javascript_include_tag "application"
+  = csrf_meta_tags
+body
+  header
+  #wrapper
+    #sidebar-wrapper
+      ul.sidebar-nav
+        li.sidebar-brand
+          .pannel_title
+            = link_to("<span class='label label-warning'>Logout</span>".html_safe, destroy_owner_session_path, :method => :delete)
+        li= render :partial => "admin_panel/link_navbar"
+    /! Page content
+    #page-content-wrapper
+      br
+      br
+      br
+      - if !@error.nil?
+        div class="alert alert-danger" 
+          = @error
+      .content-header
+        h1
+          a#menu-toggle.btn.btn-default href="#"
+            i.icon-reorder
+              | Menu
+      ol class="breadcrumb"
+        - a = '/'
+        - @tab_path.each do |link|
+          li
+            a href= "#{a + link + (params[:locale].blank? ? '' : '?locale=' + params[:locale].to_s)}"
+              = link
+          - a+= link + '/'
+        li class="active"
+          = controller.action_name == 'index' ? '' : controller.action_name
+      .page-content.inset
+        - if controller.action_name == 'index' || controller.action_name == 'new'
+          ul id="myTab" class="nav nav-tabs"
+            li class="#{controller.action_name == 'index' ? 'active' : ''}"
+              a href="#{path_controller}"
+                span class="List glyphicon glyphicon-th-list"
+                | &nbsp;&nbsp;
+                = t("methods.list")
+            - if (can? :new, eval("@"+controller.controller_name))
+              li class="#{controller.action_name == 'index' ? '' : 'active'}"
+                a href="#{(path_controller.include? '?') ? path_controller.gsub('?','/new?') : path_controller + '/new'}"
+                  span class="glyphicon glyphicon-plus-sign"
+                  | &nbsp;&nbsp;
+                  = t("methods.new")
+          div id="myTabContent" class="tab-content"
+            div class="tab-pane fade active in" id="List"
+              p
+                == yield
+        - else
+          p
+           == yield
+    /! JavaScript
+    javascript:
+      $("#menu-toggle").click(function(e) {
+           e.preventDefault();
+           $("#wrapper").toggleClass("active");
+       });

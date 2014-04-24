@@ -1,0 +1,53 @@
+.pannel_title{
+	color : #428bca;
+}
+.left {
+	float : left;
+}
+.right {
+	float: right;
+	padding-right: 0.2em;
+}
+.center{
+	float :none!important;
+	margin : 0 auto!important;
+}
+.inline_elements{
+	padding: 0em;
+}
+.inline_elements > * {
+	display : inline-block ;
+	margin-right: 1em;
+}
+._ar *{
+	text-align: right;
+}
+.admin_accces{
+	border-radius: 4px;
+	border: 1px solid  #FF6901;
+	float: none;
+	margin: 0 auto;
+	margin-top: 10%;
+	background-color:#E8E9ED  ;
+	//@include background-image(linear-gradient(left top, #E8E9ED, #E4E8EB));
+	max-width : 400px;
+	min-width: 200px;
+	h3{
+		background-color: #FF6901;
+		margin: 0px;
+		padding: 20px;
+		color: white!important;
+	}
+	* {
+		color : black!important;
+	}
+	.contain_login{
+		padding: 1em;
+	}
+}
+authform{
+	max-width : 200px;
+}
+.body-back{
+	background-color : #26292E;
+}

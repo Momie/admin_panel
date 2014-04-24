@@ -1,0 +1,14 @@
+-@models.each do |f| 
+  -if f.class.name == 'Array'
+    li
+      a href="#"
+        = t("models." + f[0].to_s ) 
+      ul
+        - f[1].each do |s|
+          li
+            a href="#{eval('admin_panel_'+ s + '_path')}" 
+              = t("models." + s )	
+  -else
+    li
+      a href="#{eval('admin_panel_'+ f + '_path')}" 
+        = t("models." + f ) 

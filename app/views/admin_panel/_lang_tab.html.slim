@@ -1,0 +1,24 @@
+.form-group
+  ul#LangTab.nav.nav-tabs
+    - @lang.each do |l|
+      li class="#{ l == @lang.first ? 'active' : ''}"
+        a href="##{l}"  data-toggle="tab"
+          = l
+  #myTabContent.tab-content
+    - @lang.each do |l|
+      div class="tab-pane #{ @lang.first == l ? 'active' : ''}" id="#{l}"
+        = fal.globalize_fields_for l.to_sym do |fo|
+          - edit_translate.each do |e|
+            strong
+              = t("#{controller.controller_name}.#{e[:name]}")
+            - unless obj.errors.messages["#{e[:name]}".to_sym].blank?
+              - unless obj.errors.messages["#{e[:name]}".to_sym][0].nil?
+                .alert.alert-danger
+                  abel.control-label
+                    = obj.errors.messages["#{e[:name]}".to_sym][0]
+            = fo.send("#{e[:type]}","#{e[:name]}".to_sym , :class => "form-control has-error" , :size => "10")
+javascript:
+  $('#LangTab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })

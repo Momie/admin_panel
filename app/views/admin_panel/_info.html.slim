@@ -1,0 +1,17 @@
+h3
+  = title
+br
+table class="table"
+  - show.each do |h|
+    tr
+      td
+        = t("#{controller.controller_name}.#{h[:name]}")
+      td
+        - if !h[:prety].nil?
+          = %{#{h[:prety].gsub('?',object[h[:value]].nil? ? '' : object[h[:value]])}}.html_safe
+        - elsif !h[:default].nil?
+          = eval("#{h[:default]}")
+        - elsif !h[:def].nil?
+          = send("#{h[:def]}",object)
+        - else
+          = object.send("#{h[:value]}")

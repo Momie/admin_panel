@@ -1,0 +1,26 @@
+tr
+  - @header.each do |h|   
+    td
+      - if !h[:prety].nil?
+        = %{#{h[:prety].gsub('?',object[h[:value]].nil? ? '' : object[h[:value]])}}.html_safe
+      - elsif !h[:default].nil?
+        = eval("#{h[:default]}")
+      - elsif !h[:def].nil?
+        = send("#{h[:def]}",object)
+      - else
+        = object.send("#{h[:value]}")
+  td
+    span.right
+      - if (can? :edit, object ) && (eval('edit_'+ path(object)) rescue false)
+        a href="#{eval('edit_'+ path(object))}"
+          span class="glyphicon glyphicon-pencil"
+        |&nbsp;
+      - if (can? :show, object) && (eval(path(object)) rescue false)
+        a href="#{eval(path(object))}"
+          span class="glyphicon glyphicon-info-sign"
+        |&nbsp;
+      - if (can? :delete, object ) && (eval('delete_'+ path(object)) rescue false)
+        a href="#{eval('delete_'+ path(object))}"
+          span class="glyphicon glyphicon-remove-circle"
+/eval(object.class.name).respond_to?('edit')
+/=# link_to 'Destroy', "#{eval(path.blank? ? 'admin_'+ controller.controller_name + '_path' : path )}/#{object.id}", method: :delete
