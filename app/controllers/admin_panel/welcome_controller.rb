@@ -1,10 +1,8 @@
 class AdminPanel::WelcomeController < AdminController
   def index
-  	@models = ["owners"]
+  	# list of model can managed it
+  	@models = []
   	@tab_path = []
-  	@data_tables = ActiveRecord::Base.connection.tables
-  	#Dir.foreach("#{RAILS_ROOT}/app/models") do |model_path|
-  	#	# ...
-	#end
+  	@data_tables = [] #ActiveRecord::Base.connection.tables
   end
 end
